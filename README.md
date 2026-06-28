@@ -3,7 +3,8 @@
 Aplikasi pencatatan pemberian obat berbasis web yang dibuat menggunakan Node.js, Express, SQLite, Bootstrap, dan EJS.
 
 Sahadev Med membantu pengguna mencatat pemberian obat, memantau stok, melakukan restock, melihat riwayat penggunaan obat, serta mengekspor data ke Excel.
-<img width="1877" height="906" alt="image" src="https://github.com/user-attachments/assets/8800c834-3077-4144-896e-b3720d409fad" />
+
+<img width="720" alt="image" src="https://github.com/user-attachments/assets/8800c834-3077-4144-896e-b3720d409fad" />
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b18a8b4d-e6bf-4440-9d2c-9e9cb9fca526" width="180">
   <img src="https://github.com/user-attachments/assets/21d91076-849b-41c0-a4cd-ba9558e03bdf" width="180">
