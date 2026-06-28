@@ -196,38 +196,6 @@ database.db
 
 Database akan otomatis digunakan oleh aplikasi saat dijalankan.
 
----
-
-## Deploy dengan Cloudflare Tunnel
-
-Menjalankan server:
-
-```bash
-npm start
-```
-
-Expose ke internet:
-
-```bash
-cloudflared tunnel run nama-tunnel
-```
-
-Contoh:
-
-```bash
-cloudflared tunnel run navidrome
-```
-
-Domain:
-
-```text
-https://med.sahadev.my.id
-```
-
-dapat diarahkan ke localhost menggunakan Cloudflare Tunnel.
-
----
-
 ## Export Data
 
 Menu Export Excel menghasilkan:
