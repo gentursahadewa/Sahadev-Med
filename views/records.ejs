@@ -1,0 +1,281 @@
+<%- include('partials/header') %>
+
+<div class="card card-dark">
+
+    <div class="card-body">
+
+        <h1 class="mb-4">
+            Pencatatan Obat
+        </h1>
+
+        <form
+            method="POST"
+            action="/record/save">
+
+            <!-- Tanggal -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Tanggal & Jam
+
+                </label>
+
+                <div class="input-group">
+
+                    <input
+                        type="datetime-local"
+                        id="administered_at"
+                        name="administered_at"
+                        class="form-control"
+                        required>
+
+                    <button
+                        type="button"
+                        id="nowBtn"
+                        class="btn btn-success">
+
+                        <i class="bi bi-clock"></i>
+
+                        Sekarang
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Obat -->
+
+            <div id="medicineContainer">
+
+                <div class="medicine-row card card-dark border mb-3">
+
+                    <div class="card-body">
+
+                        <div class="row g-2 align-items-center">
+
+                            <div class="col-md-7">
+
+                                <select
+                                    name="medicine_id"
+                                    class="form-select">
+
+                                    <% medicines.forEach(m=>{ %>
+
+                                <option
+                                value="<%= m.id %>">
+
+                                <%= m.name %>
+                                (
+                                <%= m.unit %>
+                                )
+
+                                </option>
+
+                                    <% }) %>
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    name="amount"
+                                    class="form-control"
+                                    placeholder="Jumlah"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-2 d-grid">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-danger remove-btn">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Tambah Obat -->
+
+            <div class="mb-4">
+
+                <button
+                    type="button"
+                    id="addMedicine"
+                    class="btn btn-success">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    Tambah Obat
+
+                </button>
+
+            </div>
+
+
+            <!-- Catatan -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Catatan
+
+                </label>
+
+                <textarea
+                    name="note"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Tambahkan catatan bila diperlukan"></textarea>
+
+            </div>
+
+
+            <!-- Simpan -->
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-lg">
+
+                <i class="bi bi-check-circle"></i>
+
+                Simpan Pencatatan
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+document
+.getElementById(
+    "addMedicine"
+)
+.addEventListener(
+    "click",
+    ()=>{
+
+        const row =
+        document
+        .querySelector(
+            ".medicine-row"
+        )
+        .cloneNode(true);
+
+        row
+        .querySelector(
+            "input"
+        )
+        .value = "";
+
+        document
+        .getElementById(
+            "medicineContainer"
+        )
+        .appendChild(row);
+
+    }
+);
+
+document
+.addEventListener(
+    "click",
+    (e)=>{
+
+        if(
+            e.target.closest(
+                ".remove-btn"
+            )
+        ){
+
+            const rows =
+            document
+            .querySelectorAll(
+                ".medicine-row"
+            );
+
+            if(
+                rows.length > 1
+            ){
+
+                e.target
+                .closest(
+                    ".medicine-row"
+                )
+                .remove();
+
+            }
+
+        }
+
+    }
+);
+
+function setNow(){
+
+    const now =
+    new Date();
+
+    const offset =
+    now.getTimezoneOffset();
+
+    const local =
+    new Date(
+        now.getTime() -
+        offset * 60000
+    );
+
+    document
+    .getElementById(
+        "administered_at"
+    )
+    .value =
+    local
+    .toISOString()
+    .slice(0,16);
+
+}
+
+document
+.getElementById(
+    "nowBtn"
+)
+.addEventListener(
+    "click",
+    setNow
+);
+
+window
+.addEventListener(
+    "load",
+    setNow
+);
+
+</script>
+
+<%- include('partials/footer') %>

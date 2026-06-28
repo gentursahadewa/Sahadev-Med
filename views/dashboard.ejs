@@ -1,0 +1,233 @@
+<%- include('partials/header') %>
+
+<h1 class="mb-4">
+    Dashboard
+</h1>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card card-dark h-100">
+
+            <div class="card-body">
+
+                <h5>Total Obat</h5>
+
+                <h2>
+                    <%= totalMedicines %>
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card card-dark h-100">
+
+            <div class="card-body">
+
+                <h5>Total Pemberian</h5>
+
+                <h2>
+                    <%= totalRecords %>
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card card-dark h-100">
+
+            <div class="card-body">
+
+                <h5>Stok Menipis</h5>
+
+                <h2>
+                    <%= lowStock %>
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mb-4">
+
+    <div class="d-flex gap-2 mb-4 flex-wrap">
+
+        <a
+            href="/record"
+            class="btn btn-primary">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Catat Obat
+
+        </a>
+
+        <a
+            href="/stock"
+            class="btn btn-outline-success">
+
+            <i class="bi bi-box-seam"></i>
+
+            Restock
+
+        </a>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-5 mb-4">
+
+        <div class="card card-dark">
+
+            <div class="card-body">
+
+                <h4 class="mb-3">
+                    ⚠ Obat Hampir Habis
+                </h4>
+
+                <% if(lowStockItems.length === 0){ %>
+
+                    <div class="alert alert-success">
+                        Semua stok masih aman
+                    </div>
+
+                <% } %>
+
+                <% lowStockItems.forEach(item => { %>
+
+                    <div class="alert alert-warning">
+
+                        <strong>
+                            <%= item.name %>
+                        </strong>
+
+                        <br>
+
+                        Sisa:
+                        <%= item.stock %>
+                        <%= item.unit %>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-7 mb-4">
+
+        <div class="card card-dark">
+
+            <div class="card-body">
+
+                <h4 class="mb-3">
+                    Pemberian Obat 7 Hari Terakhir
+                </h4>
+                <div style="height:300px;">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="application/json" id="weeklyDataJSON">
+    <%= JSON.stringify(weeklyData || []) %>
+</script>
+
+<script>
+
+const weeklyDataElement =
+document.getElementById(
+    "weeklyDataJSON"
+);
+
+const weeklyData =
+weeklyDataElement
+?
+JSON.parse(
+    weeklyDataElement.textContent
+)
+:
+[];
+
+console.log(weeklyData);
+
+const canvas =
+document.getElementById(
+    "weeklyChart"
+);
+
+if(
+    canvas &&
+    typeof Chart !== "undefined"
+){
+
+    const ctx =
+    canvas.getContext("2d");
+
+    new Chart(ctx, {
+
+        type: "bar",
+
+        data: {
+
+            labels:
+            weeklyData.map(
+                x => x.day
+            ),
+
+            datasets: [{
+                label:
+                "Jumlah Pemberian",
+
+                data:
+                weeklyData.map(
+                    x => x.total
+                ),
+
+                backgroundColor:
+                "#1db954"
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio:
+            false
+
+        }
+
+    });
+
+}
+
+</script>
+
+<%- include('partials/footer') %>

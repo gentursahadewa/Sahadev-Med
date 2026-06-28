@@ -1,0 +1,482 @@
+body{
+    background:#121212;
+    color:#ffffff;
+    font-family:'Segoe UI',sans-serif;
+    margin:0;
+}
+
+/* Layout */
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:250px;
+    background:#000000;
+    padding:16px;
+    border-right:1px solid #1f1f1f;
+    position:relative;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-size:1rem;
+    font-weight:600;
+
+    color:#ffffff;
+
+    margin-bottom:20px;
+}
+
+.logo span{
+    font-size:1.5rem;
+    font-weight:600;
+}
+
+.logo i{
+    font-size:1.5rem;
+    color:#1db954;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.sidebar li{
+    margin-bottom:8px;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:12px 14px;
+
+    color:#b3b3b3;
+    text-decoration:none;
+
+    border-radius:10px;
+
+    transition:.2s;
+}
+
+.sidebar a:hover{
+    background:#282828;
+    color:#ffffff;
+}
+
+.sidebar a.active{
+    background:#1db954;
+    color:#ffffff;
+    font-weight:600;
+}
+
+.sidebar a.active:hover{
+    background:#1ed760;
+    color:#ffffff;
+}
+
+/* Content */
+
+.main-content{
+    flex:1;
+    padding:30px;
+}
+
+/* Headings */
+
+h1,h2,h3,h4,h5,h6{
+    color:#ffffff;
+    font-weight:700;
+}
+
+/* Cards */
+
+.card-dark{
+    background:#181818;
+    border:none;
+    border-radius:18px;
+    color:#ffffff;
+    transition:.2s;
+}
+
+.card-dark:hover{
+    background:#202020;
+}
+
+.card-dark h1,
+.card-dark h2,
+.card-dark h3,
+.card-dark h4,
+.card-dark h5,
+.card-dark h6{
+    color:#ffffff !important;
+}
+
+.card-dark p{
+    color:#b3b3b3;
+}
+
+/* Tables */
+
+.table{
+    color:#ffffff !important;
+}
+
+.table-dark{
+    --bs-table-bg:#181818;
+    --bs-table-striped-bg:#202020;
+    --bs-table-hover-bg:#282828;
+    --bs-table-color:#ffffff;
+}
+
+/* Forms */
+
+.form-control,
+.form-select,
+textarea{
+    background:#242424 !important;
+    color:#ffffff !important;
+    border:1px solid #404040 !important;
+}
+
+.form-control::placeholder,
+textarea::placeholder{
+    color:#9ca3af;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus{
+    background:#242424 !important;
+    color:#ffffff !important;
+    border-color:#1db954 !important;
+    box-shadow:0 0 0 .2rem rgba(29,185,84,.25) !important;
+}
+
+/* Buttons */
+
+.btn-primary{
+    background:#1db954;
+    border:none;
+}
+
+.btn-primary:hover{
+    background:#1ed760;
+}
+
+.btn-success{
+    background:#1db954;
+    border:none;
+}
+
+.btn-success:hover{
+    background:#1ed760;
+}
+
+.btn-danger{
+    background:#e53935;
+    border:none;
+}
+
+/* Alerts */
+
+.alert-success{
+    background:#143d26;
+    color:#b7ffcf;
+    border:none;
+}
+
+.alert-warning{
+    background:#3a2f00;
+    color:#ffd54f;
+    border:none;
+}
+
+.alert-danger{
+    background:#4b1f1f;
+    color:#ffb4b4;
+    border:none;
+}
+
+/* Mobile Toggle */
+
+.mobile-toggle{
+    display:none;
+
+    position:fixed;
+    top:15px;
+    left:15px;
+
+    z-index:1200;
+
+    background:#1db954;
+
+    border:none;
+
+    color:white;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.mobile-toggle.hidden{
+    opacity:0;
+    pointer-events:none;
+}
+
+/* Overlay */
+
+.overlay{
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.65);
+
+    z-index:998;
+}
+
+/* Mobile Header */
+
+.mobile-header{
+    display:none;
+}
+
+/* Utilities */
+
+.text-muted{
+    color:#b3b3b3 !important;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.history-card{
+
+    border:1px solid #222;
+
+    transition:.2s;
+
+}
+
+.history-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#1db954;
+
+}
+
+.badge{
+
+    font-size:.85rem;
+
+}
+
+.medicine-row{
+    border:1px solid #2a2a2a !important;
+}
+
+.medicine-row .card-body{
+    padding:15px;
+}
+
+@media(max-width:768px){
+
+    .medicine-row .btn-danger{
+
+        width:100%;
+
+    }
+
+    .btn-lg{
+
+        width:100%;
+
+    }
+
+}
+
+.medicine-card{
+
+    border:1px solid #222;
+
+    transition:.2s;
+
+}
+
+.medicine-card:hover{
+
+    border-color:#1db954;
+
+    transform:translateY(-2px);
+
+}
+
+.medicine-card h5{
+
+    color:#fff;
+
+}
+
+.medicine-card .badge{
+
+    font-size:.8rem;
+
+}
+
+@media(max-width:768px){
+
+    .medicine-card{
+
+        margin-bottom:15px;
+
+    }
+
+}
+
+.stock-log-card{
+
+    border:1px solid #222;
+
+    transition:.2s;
+
+}
+
+.stock-log-card:hover{
+
+    border-color:#1db954;
+
+    transform:translateY(-2px);
+
+}
+
+.stock-log-card .badge{
+
+    font-size:.8rem;
+
+    padding:8px 12px;
+
+}
+
+.stock-log-card h3{
+
+    color:#ffffff;
+
+    margin-bottom:0;
+
+}
+
+.stock-log-card hr{
+
+    border-color:#2a2a2a;
+
+}
+
+@media(max-width:768px){
+
+    .stock-log-card{
+
+        margin-bottom:15px;
+
+    }
+
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .sidebar{
+        position:fixed;
+        left:-260px;
+        top:0;
+        height:100%;
+        z-index:999;
+        transition:.3s;
+    }
+
+    .sidebar.show{
+        left:0;
+    }
+
+    .mobile-toggle{
+        display:block;
+    }
+
+    .main-content{
+        padding-top:70px;
+    }
+
+    .overlay.show{
+        display:block;
+    }
+
+    .mobile-header{
+        display:block;
+        font-size:1.1rem;
+        font-weight:600;
+        margin-bottom:20px;
+        color:#ffffff;
+    }
+
+    .app-footer small{
+
+        color:#6b7280;
+
+        font-size:.8rem;
+
+    }
+
+    .app-footer{
+
+        text-align:center;
+
+        padding:20px;
+
+        margin-top:40px;
+
+        color:#888;
+    }
+
+    .sidebar a.export-link{
+
+        background:#1f1f1f;
+
+        color:#1db954;
+
+        border:1px solid #2d2d2d;
+
+    }
+
+    .sidebar a.export-link:hover{
+
+        background:#2a2a2a;
+
+        color:#1ed760;
+
+    }
+    
+}
+

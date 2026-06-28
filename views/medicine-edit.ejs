@@ -1,0 +1,82 @@
+<%- include('partials/header') %>
+
+<h1>
+
+Edit Obat
+
+</h1>
+
+<form
+method="POST"
+action="/medicines/update/<%= medicine.id %>">
+
+<div class="mb-3">
+
+<label>
+
+Nama
+
+</label>
+
+<input
+name="name"
+class="form-control"
+value="<%= medicine.name %>">
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Stok
+
+</label>
+
+<input
+name="stock"
+class="form-control"
+value="<%= medicine.stock %>">
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Unit
+
+</label>
+
+<input
+name="unit"
+class="form-control"
+value="<%= medicine.unit %>">
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Minimum Stok
+
+</label>
+
+<input
+name="reorder_level"
+class="form-control"
+value="<%= medicine.reorder_level %>">
+
+</div>
+
+<button
+class="btn btn-primary">
+
+Simpan
+
+</button>
+
+</form>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,86 @@
+const sqlite3 = require("sqlite3").verbose();
+
+const db = new sqlite3.Database("database.db");
+
+db.serialize(() => {
+
+  db.run(`
+  CREATE TABLE IF NOT EXISTS medicines (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT UNIQUE NOT NULL,
+      stock REAL DEFAULT 0,
+      unit TEXT DEFAULT 'tablet',
+      reorder_level REAL DEFAULT 10
+  )
+  `);
+
+  db.run(`
+  CREATE TABLE IF NOT EXISTS administrations (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      administered_at TEXT NOT NULL,
+      note TEXT
+  )
+  `);
+
+  db.run(`
+  CREATE TABLE IF NOT EXISTS administration_items (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      administration_id INTEGER,
+      medicine_id INTEGER,
+      amount REAL,
+
+      FOREIGN KEY(administration_id)
+      REFERENCES administrations(id),
+
+      FOREIGN KEY(medicine_id)
+      REFERENCES medicines(id)
+  )
+  `);
+
+});
+
+db.run(`
+CREATE TABLE IF NOT EXISTS stock_transactions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    medicine_id INTEGER NOT NULL,
+
+    quantity REAL NOT NULL,
+
+    transaction_type TEXT NOT NULL,
+
+    note TEXT,
+
+    created_at TEXT NOT NULL,
+
+    FOREIGN KEY(medicine_id)
+    REFERENCES medicines(id)
+)
+`);
+
+db.run(`
+CREATE TABLE IF NOT EXISTS stock_transactions (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    medicine_id INTEGER NOT NULL,
+
+    quantity REAL NOT NULL,
+
+    transaction_type TEXT NOT NULL,
+
+    reference_id INTEGER,
+
+    note TEXT,
+
+    created_at TEXT NOT NULL,
+
+    FOREIGN KEY(medicine_id)
+    REFERENCES medicines(id)
+
+)
+`);
+
+
+
+module.exports = db;

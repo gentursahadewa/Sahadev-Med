@@ -1,0 +1,145 @@
+<%- include('partials/header') %>
+
+<h1 class="mb-4">
+    Log Stok
+</h1>
+
+<% if(rows.length === 0){ %>
+
+<div class="card card-dark">
+
+    <div class="card-body">
+
+        <div class="alert alert-success mb-0">
+
+            Belum ada transaksi stok
+
+        </div>
+
+    </div>
+
+</div>
+
+<% } %>
+
+<div class="row">
+
+<% rows.forEach(r => { %>
+
+    <div class="col-lg-6 mb-3">
+
+        <div class="card card-dark stock-log-card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div>
+
+                        <h5 class="mb-1">
+
+                            <i class="bi bi-capsule"></i>
+
+                            <%= r.name %>
+
+                        </h5>
+
+                        <small class="text-muted">
+
+                            <i class="bi bi-clock"></i>
+
+                            <%= r.created_at.replace('T',' ').substring(0,16) %>
+
+                        </small>
+
+                    </div>
+
+                    <% if(r.transaction_type === 'IN'){ %>
+
+                        <span class="badge bg-success">
+
+                            <i class="bi bi-arrow-down-circle"></i>
+
+                            MASUK
+
+                        </span>
+
+                    <% } else { %>
+
+                        <span class="badge bg-danger">
+
+                            <i class="bi bi-arrow-up-circle"></i>
+
+                            KELUAR
+
+                        </span>
+
+                    <% } %>
+
+                </div>
+
+                <div class="row text-center">
+
+                    <div class="col-6">
+
+                        <div class="text-muted small">
+
+                            Jumlah
+
+                        </div>
+
+                        <h3>
+
+                            <%= r.quantity %>
+
+                        </h3>
+
+                    </div>
+
+                    <div class="col-6">
+
+                        <div class="text-muted small">
+
+                            Jenis
+
+                        </div>
+
+                        <h6>
+
+                            <%= r.transaction_type %>
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div>
+
+                    <div class="text-muted small mb-1">
+
+                        Catatan
+
+                    </div>
+
+                    <div>
+
+                        <%= r.note || '-' %>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<% }) %>
+
+</div>
+
+<%- include('partials/footer') %>

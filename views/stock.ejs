@@ -1,0 +1,94 @@
+<%- include('partials/header') %>
+
+<h1>
+
+Tambah Stok
+
+</h1>
+
+<div class="card card-dark">
+
+<div class="card-body">
+
+<form
+method="POST"
+action="/stock/add">
+
+<div class="mb-3">
+
+<label>
+
+Obat
+
+</label>
+
+<select
+name="medicine_id"
+class="form-select">
+
+<% medicines.forEach(m=>{ %>
+
+<option
+value="<%=m.id%>">
+
+<%=m.name%>
+
+(stok:
+<%=m.stock%>)
+
+</option>
+
+<% }) %>
+
+</select>
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Jumlah Masuk
+
+</label>
+
+<input
+type="number"
+step="0.01"
+name="quantity"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Catatan
+
+</label>
+
+<textarea
+name="note"
+class="form-control">
+
+</textarea>
+
+</div>
+
+<button
+class="btn btn-success">
+
+Tambah Stok
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<%- include('partials/footer') %>
+

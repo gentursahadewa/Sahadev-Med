@@ -1,0 +1,238 @@
+<%- include('partials/header') %>
+
+<h1 class="mb-4">
+    Koleksi Obat
+</h1>
+
+<div class="card card-dark mb-4">
+
+    <div class="card-body">
+
+        <form
+            method="POST"
+            action="/medicines/add">
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Nama Obat
+                    </label>
+
+                    <input
+                        name="name"
+                        class="form-control"
+                        placeholder="Contoh: Metformin"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label class="form-label">
+                        Stok Awal
+                    </label>
+
+                    <input
+                        name="stock"
+                        type="number"
+                        step="0.01"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Satuan
+                    </label>
+
+                    <input
+                        name="unit"
+                        class="form-control"
+                        placeholder="Tablet, Kapsul, ml">
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label class="form-label">
+                        Minimum
+                    </label>
+
+                    <input
+                        name="reorder_level"
+                        type="number"
+                        step="0.01"
+                        class="form-control"
+                        value="10">
+
+                </div>
+
+                <div class="col-md-1 d-grid">
+
+                    <label class="form-label">
+                        &nbsp;
+                    </label>
+
+                    <button
+                        class="btn btn-success">
+
+                        <i class="bi bi-plus-lg"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="row">
+
+<% medicines.forEach(m => { %>
+
+    <div class="col-lg-6 mb-3">
+
+        <div class="card card-dark medicine-card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <h5 class="mb-2">
+
+                            <i class="bi bi-capsule"></i>
+
+                            <%= m.name %>
+
+                        </h5>
+
+                        <div class="text-muted">
+
+                            ID:
+                            <%= m.id %>
+
+                        </div>
+
+                    </div>
+
+                    <% if(m.stock <= m.reorder_level){ %>
+
+                        <span class="badge bg-danger">
+
+                            Stok Rendah
+
+                        </span>
+
+                    <% } %>
+
+                </div>
+
+                <hr>
+
+                <div class="row text-center">
+
+                    <div class="col-4">
+
+                        <div class="text-muted small">
+
+                            Stok
+
+                        </div>
+
+                        <h5>
+
+                            <%= m.stock %>
+
+                        </h5>
+
+                    </div>
+
+                    <div class="col-4">
+
+                        <div class="text-muted small">
+
+                            Satuan
+
+                        </div>
+
+                        <h6>
+
+                            <%= m.unit %>
+
+                        </h6>
+
+                    </div>
+
+                    <div class="col-4">
+
+                        <div class="text-muted small">
+
+                            Minimum
+
+                        </div>
+
+                        <h6>
+
+                            <%= m.reorder_level %>
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="d-flex gap-2">
+
+                    <a
+                        href="/medicines/edit/<%= m.id %>"
+                        class="btn btn-warning flex-fill">
+
+                        <i class="bi bi-pencil-square"></i>
+
+                        Edit
+
+                    </a>
+
+                    <form
+                        method="POST"
+                        action="/medicines/delete/<%= m.id %>"
+                        class="flex-fill"
+                        onsubmit="return confirm('Hapus obat ini?')">
+
+                        <button
+                            class="btn btn-danger w-100">
+
+                            <i class="bi bi-trash"></i>
+
+                            Hapus
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<% }) %>
+
+</div>
+
+<%- include('partials/footer') %>

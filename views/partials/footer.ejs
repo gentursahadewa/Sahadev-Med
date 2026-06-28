@@ -1,0 +1,36 @@
+</div>
+
+</div>
+
+<script src="/js/app.js"></script>
+<footer class="app-footer">
+
+    <i class="bi bi-heart-pulse-fill"></i>
+
+    Sahadev Med
+
+    <br>
+
+    <small>
+        © 2026 All Rights Reserved
+    </small>
+
+</footer>
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker
+        .register("/sw.js")
+        .then(() => {
+            console.log("Service Worker aktif");
+        });
+
+}
+
+</script>
+
+</body>
+
+</html>
