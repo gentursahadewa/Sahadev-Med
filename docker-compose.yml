@@ -1,0 +1,16 @@
+services:
+  sahadev-med:
+    build: .
+    container_name: sahadev-med
+    restart: unless-stopped
+
+    ports:
+      - "3030:3030"
+
+    environment:
+      PORT: 3030
+      TZ: Asia/Jakarta
+      DB_PATH: /data/database.db
+
+    volumes:
+      - /mnt/sdcard/sahadev-med-data/database.db:/data/database.db
