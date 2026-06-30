@@ -44,7 +44,8 @@ router.get("/", (req, res) => {
                                             date(administered_at) AS day,
                                             COUNT(*) AS total
                                         FROM administrations
-                                        WHERE administered_at >= date('now','-7 day')
+                                        WHERE datetime(administered_at)
+                                        >= datetime('now','-7 day')
                                         GROUP BY day
                                         ORDER BY day
                                         `,

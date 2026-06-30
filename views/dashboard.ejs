@@ -268,79 +268,90 @@
 
 
 
-<script type="application/json" id="weeklyDataJSON">
-    <%= JSON.stringify(weeklyData || []) %>
-</script>
-
 <script>
 
-const weeklyDataElement =
-document.getElementById(
-    "weeklyDataJSON"
-);
+    const weeklyData = JSON.parse('<%- JSON.stringify(weeklyData || []) %>');
 
-const weeklyData =
-weeklyDataElement
-?
-JSON.parse(
-    weeklyDataElement.textContent
-)
-:
-[];
+    console.log("weeklyData:", weeklyData);
 
-console.log(weeklyData);
+    const canvas =
+    document.getElementById(
+        "weeklyChart"
+    );
 
-const canvas =
-document.getElementById(
-    "weeklyChart"
-);
+    if(
+        canvas &&
+        typeof Chart !== "undefined"
+    ){
 
-if(
-    canvas &&
-    typeof Chart !== "undefined"
-){
+        const ctx =
+        canvas.getContext("2d");
 
-    const ctx =
-    canvas.getContext("2d");
+        new Chart(ctx, {
 
-    new Chart(ctx, {
+            type: "bar",
 
-        type: "bar",
+            data: {
 
-        data: {
-
-            labels:
-            weeklyData.map(
-                x => x.day
-            ),
-
-            datasets: [{
-                label:
-                "Jumlah Pemberian",
-
-                data:
+                labels:
                 weeklyData.map(
-                    x => x.total
+                    x => x.day
                 ),
 
-                backgroundColor:
-                "#1db954"
-            }]
+                datasets: [{
 
-        },
+                    label:
+                    "Jumlah Pemberian",
 
-        options: {
+                    data:
+                    weeklyData.map(
+                        x => x.total
+                    ),
 
-            responsive: true,
+                    backgroundColor:
+                    "#1db954"
 
-            maintainAspectRatio:
-            false
+                }]
 
-        }
+            },
 
-    });
+            options: {
 
-}
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        display: false
+
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            precision: 0
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
 
 </script>
 
