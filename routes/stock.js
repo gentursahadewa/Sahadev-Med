@@ -62,7 +62,7 @@ VALUES
 ?,
 'IN',
 ?,
-datetime('now')
+datetime('now','localtime')
 )
 `,
 [

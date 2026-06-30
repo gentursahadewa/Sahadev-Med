@@ -91,6 +91,118 @@
 
 <div class="row">
 
+    <div class="col-lg-6 mb-4">
+
+        <div class="card card-dark h-100">
+
+            <div class="card-body">
+
+                <h5>
+
+                    <i class="bi bi-droplet-half"></i>
+
+                    Gula Darah Terakhir
+
+                </h5>
+
+                <h2>
+
+                    <%= latestGlucose && latestGlucose.blood_glucose
+                        ? latestGlucose.blood_glucose
+                        : '-' %>
+
+                </h2>
+
+                <small class="text-muted">
+
+                    mg/dL
+
+                </small>
+
+                <% if(latestGlucose){ %>
+
+                    <div class="mt-2 text-muted small">
+
+                        <i class="bi bi-clock"></i>
+
+                        <%= latestGlucose.measured_at
+                            .replace('T',' ')
+                            .substring(0,16) %>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card card-dark h-100">
+
+            <div class="card-body">
+
+                <h5>
+
+                    <i class="bi bi-heart-pulse"></i>
+
+                    Tensi Terakhir
+
+                </h5>
+
+                <h2>
+
+                    <% if(
+                        latestBloodPressure &&
+                        latestBloodPressure.systolic &&
+                        latestBloodPressure.diastolic
+                    ){ %>
+
+                        <%= latestBloodPressure.systolic %>
+                        /
+                        <%= latestBloodPressure.diastolic %>
+
+                    <% } else { %>
+
+                        -
+
+                    <% } %>
+
+                </h2>
+
+                <small class="text-muted">
+
+                    mmHg
+
+                </small>
+
+                <% if(latestBloodPressure){ %>
+
+                    <div class="mt-2 text-muted small">
+
+                        <i class="bi bi-clock"></i>
+
+                        <%= latestBloodPressure.measured_at
+                            .replace('T',' ')
+                            .substring(0,16) %>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
     <div class="col-lg-5 mb-4">
 
         <div class="card card-dark">
@@ -153,6 +265,8 @@
     </div>
 
 </div>
+
+
 
 <script type="application/json" id="weeklyDataJSON">
     <%= JSON.stringify(weeklyData || []) %>

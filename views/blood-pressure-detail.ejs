@@ -1,0 +1,177 @@
+<%- include('partials/header') %>
+
+<h1 class="mb-4">
+
+    Detail Tensi
+
+</h1>
+
+<a
+href="/vitals"
+class="btn btn-secondary mb-4">
+
+Kembali
+
+</a>
+
+<div class="row mb-4">
+
+    <div class="col-md-4">
+
+        <div class="card card-dark">
+
+            <div class="card-body text-center">
+
+                <h6>Rata-rata</h6>
+
+                <h2>
+
+                    <%= stats.avg_systolic || '-' %>
+                    /
+                    <%= stats.avg_diastolic || '-' %>
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card card-dark">
+
+            <div class="card-body text-center">
+
+                <h6>Tertinggi</h6>
+
+                <h2>
+
+                    <%= stats.highest_systolic || '-' %>
+                    /
+                    <%= stats.highest_diastolic || '-' %>
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card card-dark">
+
+            <div class="card-body text-center">
+
+                <h6>Terendah</h6>
+
+                <h2>
+
+                    <%= stats.lowest_systolic || '-' %>
+                    /
+                    <%= stats.lowest_diastolic || '-' %>
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card card-dark">
+
+    <div class="card-body">
+
+        <table class="table table-dark table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Waktu</th>
+
+                    <th>Tensi</th>
+
+                    <th>Catatan</th>
+                    <th>Aksi</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% rows.forEach((row, index) => { %>
+
+                <tr>
+
+                    <td>
+                        <% if(index === 0){ %>
+
+                        <span class="badge bg-success me-2">
+
+                            TERBARU
+
+                        </span>
+
+                        <% } %>
+
+                        <%= new Date(row.measured_at)
+                        .toLocaleString(
+                        'id-ID',
+                        {
+                            day:'2-digit',
+                            month:'long',
+                            year:'numeric',
+                            hour:'2-digit',
+                            minute:'2-digit'
+                        }
+                        ) %>
+
+                    </td>
+
+                    <td>
+
+                        <%= row.systolic %>
+                        /
+                        <%= row.diastolic %>
+
+                    </td>
+
+                    <td>
+
+                        <%= row.note || '-' %>
+
+                    </td>
+
+                    <td>
+
+                        <a
+                        href="/vitals/blood-pressure/edit/<%= row.id %>"
+                        class="btn btn-warning btn-sm">
+
+                        <i class="bi bi-pencil"></i>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<%- include('partials/footer') %>

@@ -51,16 +51,63 @@ router.get("/", (req, res) => {
                                         [],
                                         (err, weeklyData) => {
 
-                                            res.render(
-                                                "dashboard",
-                                                {
-                                                    totalMedicines: medicineData.total,
-                                                    totalRecords: recordData.total,
-                                                    lowStock: lowData.total,
-                                                    lowStockItems,
-                                                    weeklyData
-                                                }
-                                            );
+                                            db.get(
+                                            `
+                                            SELECT
+                                                blood_glucose,
+                                                measured_at
+                                            FROM vitals
+                                            WHERE blood_glucose IS NOT NULL
+                                            ORDER BY datetime(measured_at) DESC
+                                            LIMIT 1
+                                            `,
+                                            [],
+                                            (err, latestGlucose) => {
+
+                                                db.get(
+                                                `
+                                                SELECT
+                                                    systolic,
+                                                    diastolic,
+                                                    measured_at
+                                                FROM vitals
+                                                WHERE systolic IS NOT NULL
+                                                AND diastolic IS NOT NULL
+                                                ORDER BY datetime(measured_at) DESC
+                                                LIMIT 1
+                                                `,
+                                                [],
+                                                (err, latestBloodPressure) => {
+
+                                                    res.render(
+                                                        "dashboard",
+                                                        {
+                                                            totalMedicines:
+                                                                medicineData?.total || 0,
+
+                                                            totalRecords:
+                                                                recordData?.total || 0,
+
+                                                            lowStock:
+                                                                lowData?.total || 0,
+
+                                                            lowStockItems:
+                                                                lowStockItems || [],
+
+                                                            weeklyData:
+                                                                weeklyData || [],
+
+                                                            latestGlucose:
+                                                                latestGlucose || null,
+
+                                                            latestBloodPressure:
+                                                                latestBloodPressure || null
+                                                        }
+                                                    );
+
+                                                });
+
+                                            });
 
                                         }
                                     );

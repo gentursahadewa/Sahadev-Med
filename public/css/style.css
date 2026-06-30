@@ -404,6 +404,63 @@ textarea:focus{
 
 }
 
+.vitals-value{
+    font-size:1.8rem;
+    font-weight:700;
+}
+
+.vitals-card{
+    transition:.2s;
+}
+
+.vitals-card:hover{
+    border-color:#1db954;
+}
+
+.vitals-chart{
+    margin-bottom:20px;
+}
+
+.vitals-date{
+    font-size:.85rem;
+}
+
+@media(max-width:768px){
+
+    .vitals-value{
+        font-size:1.4rem;
+    }
+
+    .vitals-date{
+        display:block;
+        margin-top:8px;
+        text-align:left;
+    }
+
+    .vitals-card .row{
+        row-gap:15px;
+    }
+
+}
+
+    .sidebar a.export-link{
+
+        background:#1f1f1f;
+
+        color:#1db954;
+
+        border:1px solid #2d2d2d;
+
+    }
+
+    .sidebar a.export-link:hover{
+
+        background:#2a2a2a;
+
+        color:#1ed760;
+
+    }
+
 /* Mobile */
 
 @media (max-width:768px){
@@ -458,24 +515,6 @@ textarea:focus{
         margin-top:40px;
 
         color:#888;
-    }
-
-    .sidebar a.export-link{
-
-        background:#1f1f1f;
-
-        color:#1db954;
-
-        border:1px solid #2d2d2d;
-
-    }
-
-    .sidebar a.export-link:hover{
-
-        background:#2a2a2a;
-
-        color:#1ed760;
-
     }
     
 }

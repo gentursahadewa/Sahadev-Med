@@ -164,46 +164,41 @@ router.post("/save", (req, res) => {
                 // =====================
 
                 db.run(
-                    `
-                    INSERT INTO stock_transactions
-                    (
-                        medicine_id,
-                        quantity,
-                        transaction_type,
-                        note,
-                        created_at
-                    )
-                    VALUES
-                    (
-                        ?,
-                        ?,
-                        ?,
-                        ?,
-                        datetime('now')
-                    )
-                    `,
-                    [
-                        id,
-                        amount,
-                        "OUT",
-                        "Pemberian obat"
-                    ],
-                    (err) => {
-
-                        if (err) {
-                            console.error(err);
-                        }
-
-                    }
+                `
+                INSERT INTO stock_transactions
+                (
+                    medicine_id,
+                    quantity,
+                    transaction_type,
+                    reference_id,
+                    note,
+                    created_at
+                )
+                VALUES
+                (
+                    ?,
+                    ?,
+                    'OUT',
+                    ?,
+                    ?,
+                    datetime('now','localtime')
+                )
+                `,
+                [
+                    id,
+                    amount,
+                    administrationId,
+                    'Pemberian obat'
+                ]
                 );
 
-            });
+                            });
 
-            res.redirect("/history");
+                            res.redirect("/history");
 
-        }
-    );
+                        }
+                    );
 
-});
+                });
 
 module.exports = router;

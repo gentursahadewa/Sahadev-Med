@@ -82,3 +82,11 @@ app.use(
 "/export",
 exportRoute
 );
+
+const vitalsRoutes =
+require("./routes/vitals");
+
+app.use(
+    "/vitals",
+    vitalsRoutes
+);
