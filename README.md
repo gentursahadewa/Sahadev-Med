@@ -6,7 +6,7 @@ Sahadev Med membantu pengguna mencatat pemberian obat, memantau stok, melakukan 
 
 
 <p align="center">
-  <img width="180" alt="Mobile View" src="https://github.com/user-attachments/assets/985e511b-8ffd-42b9-8eff-e486f98f7730" />
+  <img width="720" alt="Mobile View" src="https://github.com/user-attachments/assets/985e511b-8ffd-42b9-8eff-e486f98f7730" />
 </p>
 
 ---
