@@ -2,7 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-const db = require("../config/database");
+const db = require("../config/database"); 
+const webpush = require("../config/webpush");
 
 router.get("/", (req, res) => {
 
@@ -150,11 +151,89 @@ router.post("/save", (req, res) => {
             diastolic || null,
             note
         ],
-        function(){
+        async function(){
 
-            res.redirect(
-            `/vitals?success=1&id=${this.lastID}`
-            );
+            const lastId =
+            this.lastID;
+
+            db.all(
+            `
+            SELECT subscription
+            FROM push_subscriptions
+            `,
+            [],
+            async (
+            err,
+            subs
+            )=>{
+
+                if(!err && subs){
+
+                    let jenis = [];
+
+                    if(blood_glucose){
+                        jenis.push(
+                        `Gula Darah ${blood_glucose} mg/dL`
+                        );
+                    }
+
+                    if(
+                    systolic &&
+                    diastolic
+                    ){
+                        jenis.push(
+                        `Tensi ${systolic}/${diastolic} mmHg`
+                        );
+                    }
+
+                    const isiNotif =
+                    jenis.join(" | ");
+
+                    for(
+                    const row
+                    of subs
+                    ){
+
+                        try{
+
+                            await webpush
+                            .sendNotification(
+
+                                JSON.parse(
+                                row.subscription
+                                ),
+
+                                JSON.stringify({
+
+                                    title:
+                                    "🩺 Sahadev Med",
+
+                                    body:
+                                    `Data kesehatan baru dicatat: ${isiNotif}`
+
+                                })
+
+                            );
+
+                        }
+                        catch(e){
+
+                            console.error(
+                            "Push Error:",
+                            e.message
+                            );
+
+                        }
+
+                    }
+
+                }
+
+                res.redirect(
+                `/vitals?success=1&id=${lastId}`
+                );
+
+            });
 
         }
     );

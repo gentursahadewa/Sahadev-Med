@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("../config/database");
+const webpush =
+require("../config/webpush");
 
 
 // =====================
@@ -192,13 +194,100 @@ router.post("/save", (req, res) => {
                 ]
                 );
 
-                            });
+            });
 
-                            res.redirect("/history");
+            db.all(
+            `
+            SELECT
+                id,
+                name,
+                unit
+            FROM medicines
+            WHERE id IN (${medicineIds.map(() => "?").join(",")})
+            `,
+            medicineIds,
+            (err, medicinesData)=>{
+
+                const medicineText =
+                medicinesData
+                .map(m=>{
+
+                    const index =
+                    medicineIds.indexOf(
+                    String(m.id)
+                    );
+
+                    return `${m.name} (${amounts[index]} ${m.unit})`;
+
+                })
+                .join("\n");
+
+                db.all(
+                `
+                SELECT subscription
+                FROM push_subscriptions
+                `,
+                [],
+                async (
+                err,
+                subs
+                )=>{
+
+                    if(!err && subs){
+
+                        for(
+                        const row
+                        of subs
+                        ){
+
+                            try{
+
+                                await webpush
+                                .sendNotification(
+
+                                    JSON.parse(
+                                    row.subscription
+                                    ),
+
+                                    JSON.stringify({
+
+                                        title:
+                                        "💊 Pemberian Obat Baru",
+
+                                        body:
+                                        `${administered_at}\n\n${medicineText}${
+                                        note ? `\n\n📝 ${note}` : ""
+                                        }`
+
+                                    })
+
+                                );
+
+                            }
+                            catch(e){
+
+                                console.error(
+                                "Push Error:",
+                                e.message
+                                );
+
+                            }
 
                         }
+
+                    }
+
+                    res.redirect(
+                    "/history"
                     );
 
                 });
+
+            });
+
+        }
+    );
+
+});
 
 module.exports = router;

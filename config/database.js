@@ -82,6 +82,15 @@ CREATE TABLE IF NOT EXISTS stock_transactions (
 )
 `);
 
+db.run(`
+CREATE TABLE IF NOT EXISTS push_subscriptions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    endpoint TEXT UNIQUE,
+    subscription TEXT NOT NULL,
+    created_at TEXT
+)
+`);
+
 
 
 module.exports = db;
