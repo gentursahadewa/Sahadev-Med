@@ -1,16 +1,12 @@
 # Sahadev Med
 
-Aplikasi pencatatan pemberian obat berbasis web yang dibuat menggunakan Node.js, Express, SQLite, Bootstrap, dan EJS.
+Aplikasi pencatatan obat dan pemantauan kesehatan berbasis web yang dibuat menggunakan Node.js, Express, SQLite, EJS, Bootstrap, dan Chart.js.
 
-Sahadev Med membantu pengguna mencatat pemberian obat, memantau stok, melakukan restock, melihat riwayat penggunaan obat, serta mengekspor data ke Excel.
-<p align="center">  
-  <img width="900" alt="image" src="https://github.com/user-attachments/assets/8800c834-3077-4144-896e-b3720d409fad" />
-</p>
+Sahadev Med membantu pengguna mencatat pemberian obat, memantau stok, melakukan restock, mencatat gula darah dan tekanan darah, melihat riwayat kesehatan, serta mengekspor seluruh data ke Microsoft Excel.
+
+
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/b18a8b4d-e6bf-4440-9d2c-9e9cb9fca526" width="180">
-  <img src="https://github.com/user-attachments/assets/21d91076-849b-41c0-a4cd-ba9558e03bdf" width="180">
-  <img src="https://github.com/user-attachments/assets/e3da6dba-efb1-4177-823d-6c65e4455c74" width="180">
-  <img src="https://github.com/user-attachments/assets/fc895e44-877a-470a-9bfd-54ff5b76d7d3" width="180">
+  <img width="720" alt="Mobile View" src="https://github.com/user-attachments/assets/985e511b-8ffd-42b9-8eff-e486f98f7730" />
 </p>
 
 ---
@@ -19,58 +15,222 @@ Sahadev Med membantu pengguna mencatat pemberian obat, memantau stok, melakukan 
 
 ### Dashboard
 
-* Total jenis obat
-* Total pemberian obat
-* Jumlah obat dengan stok menipis
-* Daftar obat yang perlu direstock
-* Grafik pemberian obat
+- Total jenis obat
+- Total pemberian obat
+- Jumlah obat dengan stok menipis
+- Daftar obat yang perlu direstock
+- Grafik pemberian obat 7 hari terakhir
+- Informasi gula darah terakhir
+- Informasi tekanan darah terakhir
+
+---
 
 ### Pencatatan Obat
 
-* Mencatat beberapa obat dalam satu waktu
-* Menambahkan catatan pemberian
-* Otomatis mengurangi stok obat
+- Mencatat beberapa obat dalam satu waktu
+- Default jumlah obat otomatis 1
+- Menambahkan catatan pemberian obat
+- Tombol waktu otomatis (Sekarang)
+- Otomatis mengurangi stok obat
+- Otomatis mencatat log stok keluar
 
-### Riwayat Pemberian
+---
 
-* Melihat seluruh riwayat pemberian obat
-* Detail obat yang diberikan
-* Menghapus riwayat dan mengembalikan stok
+### Riwayat Pemberian Obat
+
+- Melihat seluruh riwayat pemberian obat
+- Detail obat yang diberikan
+- Edit data pemberian obat
+- Hapus data pemberian obat
+- Stok otomatis disesuaikan saat edit atau hapus data
+
+---
+
+### Cek Kesehatan
+
+Mencatat data kesehatan pasien secara terpusat.
+
+#### Gula Darah
+
+- Catat gula darah sewaktu
+- Catat gula darah puasa
+- Riwayat gula darah
+- Statistik:
+  - Nilai tertinggi
+  - Nilai terendah
+  - Nilai rata-rata
+- Grafik perkembangan gula darah
+- Edit data
+- Hapus data
+
+#### Tekanan Darah
+
+- Catat sistolik dan diastolik
+- Riwayat tekanan darah
+- Statistik:
+  - Tekanan darah tertinggi
+  - Tekanan darah terendah
+  - Rata-rata tekanan darah
+- Grafik perkembangan tekanan darah
+- Edit data
+- Hapus data
+
+---
 
 ### Master Obat
 
-* Tambah obat
-* Edit obat
-* Hapus obat
-* Menentukan batas minimum stok
+- Tambah obat
+- Edit obat
+- Hapus obat
+- Menentukan batas minimum stok
+- Pengaturan satuan obat
+
+Contoh satuan:
+
+- Tablet
+- Kapsul
+- Botol
+- Sachet
+- Ampul
+
+---
 
 ### Restock
 
-* Menambahkan stok obat
-* Mencatat histori restock
+- Menambahkan stok obat
+- Menyimpan catatan restock
+- Otomatis mencatat log stok masuk
+
+---
 
 ### Log Stok
 
-* Riwayat keluar masuk stok
-* Monitoring perubahan stok
+- Riwayat stok masuk
+- Riwayat stok keluar
+- Waktu transaksi
+- Jumlah perubahan stok
+- Catatan transaksi
+
+---
 
 ### Export Excel
 
-* Riwayat pemberian obat
-* Log stok
-* Stok saat ini
-* Format XLSX
+Mengekspor seluruh data ke file Microsoft Excel (.xlsx).
+
+#### Sheet Timeline Lengkap
+
+Menggabungkan seluruh aktivitas berdasarkan waktu:
+
+- Pemberian obat
+- Gula darah
+- Tekanan darah
+
+Kolom:
+
+- Tanggal
+- Waktu
+- Obat
+- Gula Darah
+- Tensi
+- Catatan Obat
+- Catatan Kesehatan
+
+#### Sheet Riwayat Pemberian Obat
+
+- Tanggal
+- Waktu
+- Obat dan dosis
+- Catatan
+
+#### Sheet Riwayat Kesehatan
+
+- Tanggal
+- Waktu
+- Gula darah
+- Tekanan darah
+- Catatan
+
+#### Sheet Log Stok
+
+- Tanggal
+- Waktu
+- Obat
+- Jenis transaksi
+- Jumlah
+- Catatan
+
+#### Sheet Stok Saat Ini
+
+- Nama obat
+- Stok saat ini
+- Satuan
+- Minimum stok
+
+---
+
+### Progressive Web App (PWA)
+
+- Install ke Android melalui Chrome
+- Shortcut aplikasi di layar utama
+- Ikon aplikasi khusus
+- Tampilan seperti aplikasi native
 
 ---
 
 ## Teknologi
 
-* Node.js
-* Express.js
-* SQLite3
-* EJS
-* Bootstrap 5
-* Bootstrap Icons
+### Backend
+
+- Node.js
+- Express.js
+- SQLite3
+
+### Frontend
+
+- EJS
+- Bootstrap 5
+- Bootstrap Icons
+- Chart.js
+
+### Export Data
+
+- ExcelJS
+
+---
+
+## Struktur Data
+
+### Obat
+
+- Nama obat
+- Stok
+- Satuan
+- Minimum stok
+
+### Pemberian Obat
+
+- Tanggal dan waktu
+- Daftar obat
+- Jumlah obat
+- Catatan
+
+### Kesehatan
+
+- Gula darah
+- Tekanan darah
+- Catatan pemeriksaan
+
+---
+
+## Tujuan
+
+Sahadev Med dibuat untuk membantu pencatatan obat dan pemantauan kesehatan secara sederhana, cepat, dan mudah digunakan, terutama untuk penggunaan pribadi maupun keluarga.
+
+---
+
+## Lisensi
+
+MIT License* Bootstrap Icons
 * ExcelJS
 * Chart.js
 
