@@ -20,7 +20,7 @@ app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
-
+app.locals.VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY;
 
 const PORT = process.env.PORT || 3000;
 
