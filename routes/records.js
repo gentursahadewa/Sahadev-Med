@@ -6,6 +6,12 @@ const db = require("../config/database");
 const webpush =
 require("../config/webpush");
 
+const adminOnly =
+require(
+"../middleware/adminOnly"
+);
+
+
 
 // =====================
 // HALAMAN FORM
@@ -44,7 +50,7 @@ router.get("/", (req, res) => {
 // SIMPAN CATATAN
 // =====================
 
-router.post("/save", (req, res) => {
+router.post("/save", adminOnly, (req, res) => {
 
     const {
         administered_at,

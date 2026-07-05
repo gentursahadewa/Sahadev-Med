@@ -1,5 +1,5 @@
 <%- include('partials/header') %>
-
+<% if(isLoggedIn){ %>
 <h1>
 
 Tambah Stok
@@ -89,6 +89,13 @@ Tambah Stok
 </div>
 
 </div>
+<% } else { %>
+
+<%- include(
+'partials/admin-lock'
+) %>
+
+<% } %>
 
 <%- include('partials/footer') %>
 

@@ -4,15 +4,47 @@ const express = require("express");
 
 const app = express();
 
+const session =
+require(
+"express-session"
+);
+
+app.use(
+session({
+
+    secret:
+    process.env.SESSION_SECRET,
+
+    resave:false,
+
+    saveUninitialized:false,
+
+    cookie:{
+
+        maxAge:
+        1000 *
+        60 *
+        60 *
+        24 *
+        30
+
+    }
+
+})
+);
+
 require("./config/database");
 
-app.use((req, res, next) => {
+app.use((req,res,next)=>{
 
     res.locals.currentPath =
     req.path;
 
     res.locals.vapidPublicKey =
     process.env.VAPID_PUBLIC_KEY;
+
+    res.locals.isLoggedIn =
+    !!req.session.user;
 
     next();
 
@@ -111,4 +143,12 @@ require(
 )
 );
 
+const authRoute =
+require(
+"./routes/auth"
+);
 
+app.use(
+"/",
+authRoute
+);

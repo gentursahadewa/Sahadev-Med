@@ -91,6 +91,71 @@ CREATE TABLE IF NOT EXISTS push_subscriptions (
 )
 `);
 
+db.run(`
+CREATE TABLE IF NOT EXISTS users(
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    username TEXT UNIQUE,
+
+    password TEXT
+
+)
+`);
+
+const bcrypt =
+require(
+"bcrypt"
+);
+
+db.get(
+`
+SELECT COUNT(*) total
+FROM users
+`,
+[],
+async (
+err,
+row
+)=>{
+
+    if(
+        row.total === 0
+    ){
+        
+        const hash =
+        await bcrypt.hash(
+            process.env.DEFAULT_ADMIN_PASSWORD,
+            10
+        );
+
+        db.run(
+        `
+        INSERT INTO users
+        (
+            username,
+            password
+        )
+        VALUES
+        (
+            ?,
+            ?
+        )
+        `,
+        [
+            "admin",
+            hash
+        ]
+        );
+
+        console.log(
+        "Admin default dibuat"
+        );
+
+    }
+
+});
+
 
 
 module.exports = db;

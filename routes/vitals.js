@@ -5,6 +5,11 @@ const router = express.Router();
 const db = require("../config/database"); 
 const webpush = require("../config/webpush");
 
+const adminOnly =
+require(
+"../middleware/adminOnly"
+);
+
 router.get("/", (req, res) => {
 
     const days =
@@ -115,7 +120,7 @@ router.get("/", (req, res) => {
 
 });
 
-router.post("/save", (req, res) => {
+router.post("/save", adminOnly, (req, res) => {
 
     const {
 
@@ -400,7 +405,7 @@ router.get(
 
 
 router.get(
-"/glucose/edit/:id",
+"/glucose/edit/:id", adminOnly,
 (req,res)=>{
 
     db.get(
@@ -434,7 +439,7 @@ router.get(
 });
 
 router.post(
-"/glucose/edit/:id",
+"/glucose/edit/:id", adminOnly,
 (req,res)=>{
 
     const {
@@ -469,7 +474,7 @@ router.post(
 });
 
 router.post(
-"/glucose/delete/:id",
+"/glucose/delete/:id", adminOnly,
 (req,res)=>{
 
     db.run(
@@ -525,7 +530,7 @@ router.get(
 });
 
 router.post(
-"/blood-pressure/edit/:id",
+"/blood-pressure/edit/:id", adminOnly,
 (req,res)=>{
 
     const {
@@ -563,7 +568,7 @@ router.post(
 });
 
 router.post(
-"/blood-pressure/delete/:id",
+"/blood-pressure/delete/:id", adminOnly,
 (req,res)=>{
 
     db.run(

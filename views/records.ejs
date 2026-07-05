@@ -1,5 +1,5 @@
 <%- include('partials/header') %>
-
+<% if(isLoggedIn){ %>
 <div class="card card-dark">
 
     <div class="card-body">
@@ -170,6 +170,12 @@
 
 </div>
 
+<% } else { %>
+<%- include(
+'partials/admin-lock'
+) %>
+
+<% } %>   
 
 <script>
 

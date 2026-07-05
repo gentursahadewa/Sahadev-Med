@@ -445,11 +445,10 @@ textarea:focus{
 
     .sidebar a.export-link{
 
-        background:#1f1f1f;
+        background:#1f1f1f00;
 
         color:#1db954;
-
-        border:1px solid #2d2d2d;
+        
 
     }
 
@@ -460,6 +459,24 @@ textarea:focus{
         color:#1ed760;
 
     }
+
+.sidebar a.login-link,
+.sidebar a.logout-link{
+
+    color:#d17b7b;
+    border:0.5px solid #2d2d2d;
+
+}
+
+.sidebar a.login-link:hover,
+.sidebar a.logout-link:hover{
+
+    background:#282828;
+
+    color:#ff9b9b;
+
+}
+        
 
 /* Mobile */
 
@@ -627,6 +644,35 @@ textarea:focus{
         color:#1db954;
 
     }
-        
+    
+        .admin-lock-card{
+
+        max-width:600px;
+
+        margin:auto;
+
+        margin-top:40px;
+
+        text-align:center;
+
+        background:#181818;
+
+        border:1px solid #2a2a2a;
+
+        border-radius:24px;
+
+        padding:40px;
+
+    }
+
+    .admin-lock-icon{
+
+        font-size:3rem;
+
+        color:#1db954;
+
+        margin-bottom:15px;
+
+    }
 }
 

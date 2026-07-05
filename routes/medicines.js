@@ -3,6 +3,11 @@ const router = express.Router();
 
 const db = require("../config/database");
 
+const adminOnly =
+require(
+"../middleware/adminOnly"
+);
+
 //halaman daftar obat
 router.get("/", (req,res)=>{
 
@@ -62,7 +67,7 @@ res.redirect("/medicines");
 });
 
 //form edit
-router.get("/edit/:id",(req,res)=>{
+router.get("/edit/:id", adminOnly,(req,res)=>{
 
 db.get(
 `
@@ -76,7 +81,7 @@ req.params.id
 (err,row)=>{
 
 res.render(
-"medicine-edit",
+"medicine-edit", adminOnly,
 {
 medicine: row
 }
@@ -121,7 +126,7 @@ res.redirect("/medicines");
 });
 
 //hapusobat
-router.post("/delete/:id",(req,res)=>{
+router.post("/delete/:id", adminOnly,(req,res)=>{
 
 db.run(
 `

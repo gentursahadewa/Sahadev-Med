@@ -125,7 +125,7 @@
                     Detail
 
                 </a>
-
+<% if(isLoggedIn){ %>
                 <a
                 href="/history/edit/<%=r.id%>"
                 class="btn btn-warning btn-sm">
@@ -151,7 +151,7 @@
                     </button>
 
                 </form>
-
+<% } %>
             </div>
 
         </div>

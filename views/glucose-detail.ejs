@@ -93,9 +93,10 @@ Kembali
                     <th>Gula Darah</th>
 
                     <th>Catatan</th>
-
+<% if(isLoggedIn){ %>
                     <th>Aksi</th>
 
+<% } %>
                 </tr>
 
             </thead>
@@ -143,7 +144,7 @@ Kembali
                     <%= row.note || '-' %>
 
                 </td>
-
+<% if(isLoggedIn){ %>
                 <td>
 
                     <a
@@ -156,6 +157,7 @@ Kembali
 
                 </td>
 
+<% } %>
             </tr>
 
             <% }) %>

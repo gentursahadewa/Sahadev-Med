@@ -4,6 +4,11 @@ const router = express.Router();
 
 const db = require("../config/database");
 
+const adminOnly =
+require(
+"../middleware/adminOnly"
+);
+
 
 // =====================
 // HALAMAN RIWAYAT
@@ -129,7 +134,7 @@ router.get("/:id", (req, res) => {
 // =====================
 
 router.post(
-    "/delete/:id",
+    "/delete/:id", adminOnly,
     (req, res) => {
 
         db.all(
@@ -226,7 +231,7 @@ router.post(
 //edit
 
 router.get(
-"/edit/:id",
+"/edit/:id", adminOnly,
 (req,res)=>{
 
     db.all(
@@ -286,7 +291,7 @@ router.get(
 //save edit
 
 router.post(
-"/edit/:id",
+"/edit/:id", adminOnly,
 (req,res)=>{
 
     const {

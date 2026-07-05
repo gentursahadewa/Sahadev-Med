@@ -3,6 +3,11 @@ const router = express.Router();
 
 const db = require("../config/database");
 
+const adminOnly =
+require(
+"../middleware/adminOnly"
+);
+
 router.get("/", (req,res)=>{
 
 db.all(
@@ -25,7 +30,7 @@ medicines
 
 });
 
-router.post("/add",(req,res)=>{
+router.post("/add", adminOnly,(req,res)=>{
 
 const {
 medicine_id,

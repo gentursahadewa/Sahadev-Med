@@ -253,6 +253,32 @@ aria-hidden="true">
                         Export Excel
 
                     </a>
+            <% if(isLoggedIn){ %>
+
+                <a
+                href="/logout"
+                class="list-group-item list-group-item-action text-danger">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout
+
+                </a>
+
+
+            <% } else { %>
+
+                <a
+                href="/login"
+                class="list-group-item list-group-item-action text-danger">
+
+                    <i class="bi bi-person-lock"></i>
+
+                    Login Admin
+
+                </a>
+
+            <% } %>
 
                 </div>
 

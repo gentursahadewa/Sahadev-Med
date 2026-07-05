@@ -3,6 +3,7 @@
 <h1 class="mb-4">
     Koleksi Obat
 </h1>
+<% if(isLoggedIn){ %>
 
 <div class="card card-dark mb-4">
 
@@ -93,7 +94,7 @@
     </div>
 
 </div>
-
+<% } %>
 
 <div class="row">
 
@@ -195,7 +196,7 @@
                 <hr>
 
                 <div class="d-flex gap-2">
-
+<% if(isLoggedIn){ %>
                     <a
                         href="/medicines/edit/<%= m.id %>"
                         class="btn btn-warning flex-fill">
@@ -222,7 +223,7 @@
                         </button>
 
                     </form>
-
+<% } %>
                 </div>
 
             </div>
