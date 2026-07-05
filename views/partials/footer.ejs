@@ -98,10 +98,10 @@ async function initPush(){
                 userVisibleOnly:
                 true,
 
-            applicationServerKey:
-            urlBase64ToUint8Array(
-            "<%= vapidPublicKey %>"
-            )
+                applicationServerKey:
+                urlBase64ToUint8Array(
+                "<%= VAPID_PUBLIC_KEY %>"
+                )
 
             });
 
