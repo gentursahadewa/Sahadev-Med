@@ -7,6 +7,18 @@ const app = express();
 require("./config/database");
 
 app.use((req, res, next) => {
+
+    res.locals.currentPath =
+    req.path;
+
+    res.locals.vapidPublicKey =
+    process.env.VAPID_PUBLIC_KEY;
+
+    next();
+
+});
+
+app.use((req, res, next) => {
     res.locals.currentPath = req.path;
     next();
 });
@@ -98,3 +110,5 @@ require(
 "./routes/push"
 )
 );
+
+
