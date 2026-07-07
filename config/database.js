@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS users(
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-    username TEXT UNIQUE,
+    username TEXT UNIQUE NOT NULL,
 
-    password TEXT
+    password TEXT NOT NULL
 
 )
 `);
@@ -110,7 +110,7 @@ require(
 
 db.get(
 `
-SELECT COUNT(*) total
+SELECT COUNT(*) AS total
 FROM users
 `,
 [],
@@ -119,43 +119,102 @@ err,
 row
 )=>{
 
+    if(err){
+
+        console.error(
+        "Gagal cek tabel users:",
+        err
+        );
+
+        return;
+
+    }
+
+    if(
+        !row
+    ){
+
+        console.error(
+        "Data users tidak ditemukan"
+        );
+
+        return;
+
+    }
+
     if(
         row.total === 0
     ){
-        
-        const hash =
-        await bcrypt.hash(
-            process.env.DEFAULT_ADMIN_PASSWORD,
-            10
-        );
 
-        db.run(
-        `
-        INSERT INTO users
-        (
-            username,
-            password
-        )
-        VALUES
-        (
-            ?,
-            ?
-        )
-        `,
-        [
-            "admin",
-            hash
-        ]
-        );
+        if(
+            !process.env.DEFAULT_ADMIN_PASSWORD
+        ){
 
-        console.log(
-        "Admin default dibuat"
-        );
+            console.error(
+            "DEFAULT_ADMIN_PASSWORD belum diisi di .env"
+            );
+
+            return;
+
+        }
+
+        try{
+
+            const hash =
+            await bcrypt.hash(
+                process.env.DEFAULT_ADMIN_PASSWORD,
+                10
+            );
+
+            db.run(
+            `
+            INSERT INTO users
+            (
+                username,
+                password
+            )
+            VALUES
+            (
+                ?,
+                ?
+            )
+            `,
+            [
+                process.env.DEFAULT_ADMIN_USERNAME || "admin",
+                hash
+            ],
+            (err)=>{
+
+                if(err){
+
+                    console.error(
+                    "Gagal membuat admin default:",
+                    err
+                    );
+
+                }else{
+
+                    console.log(
+                    "Admin default dibuat"
+                    );
+
+                }
+
+            });
+
+        }
+        catch(error){
+
+            console.error(
+            "Gagal membuat hash password:",
+            error
+            );
+
+        }
 
     }
 
 });
-
 
 
 module.exports = db;

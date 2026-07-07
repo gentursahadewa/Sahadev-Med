@@ -1,5 +1,32 @@
 require("dotenv").config();
 
+const requiredEnv = [
+
+    "SESSION_SECRET",
+    "VAPID_PUBLIC_KEY",
+    "VAPID_PRIVATE_KEY"
+
+];
+
+for(
+    const key
+    of requiredEnv
+){
+
+    if(
+        !process.env[key]
+    ){
+
+        console.error(
+        `ENV ${key} belum diisi`
+        );
+
+        process.exit(1);
+
+    }
+
+}
+
 const express = require("express");
 
 const app = express();
@@ -48,11 +75,6 @@ app.use((req,res,next)=>{
 
     next();
 
-});
-
-app.use((req, res, next) => {
-    res.locals.currentPath = req.path;
-    next();
 });
 
 app.use(express.urlencoded({
