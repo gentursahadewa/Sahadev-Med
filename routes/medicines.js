@@ -32,7 +32,7 @@ medicines: rows
 });
 
 //tambahkan obat
-router.post("/add",(req,res)=>{
+router.post("/add", adminOnly, (req,res)=>{
 
 const {
 name,
@@ -81,7 +81,7 @@ req.params.id
 (err,row)=>{
 
 res.render(
-"medicine-edit", adminOnly,
+"medicine-edit", 
 {
 medicine: row
 }
@@ -92,7 +92,7 @@ medicine: row
 });
 
 //updateobat
-router.post("/update/:id",(req,res)=>{
+router.post("/update/:id", adminOnly, (req,res)=>{
 
 const {
 name,
